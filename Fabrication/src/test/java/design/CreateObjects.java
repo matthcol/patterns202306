@@ -1,7 +1,7 @@
 package design;
 
 
-import org.example.model.FrenchCity;
+import org.example.frenchmodel.FrenchCity;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

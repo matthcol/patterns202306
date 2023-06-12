@@ -1,8 +1,9 @@
-package org.example.model;
+package org.example.frenchmodel;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import org.example.model.AbstractCity;
 
 import java.util.ArrayList;
 import java.util.List;

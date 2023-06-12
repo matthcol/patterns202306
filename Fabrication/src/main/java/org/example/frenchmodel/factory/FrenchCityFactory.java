@@ -1,7 +1,8 @@
-package org.example.model.factory;
+package org.example.frenchmodel.factory;
 
 import org.example.model.AbstractCity;
-import org.example.model.FrenchCity;
+import org.example.frenchmodel.FrenchCity;
+import org.example.model.factory.CityFactory;
 
 public class FrenchCityFactory implements CityFactory {
     @Override
