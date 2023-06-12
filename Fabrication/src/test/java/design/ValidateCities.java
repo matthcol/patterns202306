@@ -2,13 +2,12 @@ package design;
 
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
-import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.example.City;
+import org.example.model.FrenchCity;
 
 import java.util.stream.Stream;
 
@@ -21,15 +20,15 @@ public class ValidateCities {
                 .getValidator();
     }
 
-    private static Stream<City> validCities() {
+    private static Stream<FrenchCity> validCities() {
         return Stream.of(
-                City.builder()
+                FrenchCity.builder()
                         .name("Toulouse")
                         .population(470000)
                         .region("Occitanie")
                         .gpsCoordinates("ici c'est Toulouse")
                         .build(),
-                City.builder()
+                FrenchCity.builder()
                         .name("Toulouse")
                         .gpsCoordinates("ici c'est Toulouse")
                         .build()
@@ -37,48 +36,48 @@ public class ValidateCities {
     }
     @ParameterizedTest
     @MethodSource("validCities")
-    void validateCity(City city) {
+    void validateCity(FrenchCity city) {
         var constraintsViolations = validator.validate(city);
         assertEquals(0, constraintsViolations.size());
     }
 
-    private static Stream<City> invalidCities() {
+    private static Stream<FrenchCity> invalidCities() {
         return Stream.of(
                 // no name
-                City.builder()
+                FrenchCity.builder()
                         .population(470000)
                         .region("Occitanie")
                         .gpsCoordinates("ici c'est Toulouse")
                         .build(),
                 // blank name
-                City.builder()
+                FrenchCity.builder()
                         .name("")
                         .population(470000)
                         .region("Occitanie")
                         .gpsCoordinates("ici c'est Toulouse")
                         .build(),
                 // 0 population
-                City.builder()
+                FrenchCity.builder()
                         .name("Toulouse")
                         .population(0)
                         .region("Occitanie")
                         .gpsCoordinates("ici c'est Toulouse")
                         .build(),
                 // negative population
-                City.builder()
+                FrenchCity.builder()
                         .name("Toulouse")
                         .population(-470000)
                         .region("Occitanie")
                         .gpsCoordinates("ici c'est Toulouse")
                         .build(),
                 // no Gps
-                City.builder()
+                FrenchCity.builder()
                         .name("Toulouse")
                         .population(470000)
                         .region("Occitanie")
                         .build(),
                 // blank gps
-                City.builder()
+                FrenchCity.builder()
                         .name("Toulouse")
                         .population(470000)
                         .region("Occitanie")
@@ -88,7 +87,7 @@ public class ValidateCities {
     }
     @ParameterizedTest
     @MethodSource("invalidCities")
-    void invalidateCities(City city){
+    void invalidateCities(FrenchCity city){
         var constraintsViolations = validator.validate(city);
         System.out.println(constraintsViolations);
         assertTrue(constraintsViolations.size() > 0);

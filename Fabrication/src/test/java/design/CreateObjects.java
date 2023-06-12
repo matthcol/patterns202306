@@ -1,14 +1,8 @@
 package design;
 
 
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import org.example.City;
-import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator;
-import org.junit.jupiter.api.BeforeAll;
+import org.example.model.FrenchCity;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -69,24 +63,24 @@ public class CreateObjects {
 
     @Test
     void buildCityWithBuilder() {
-        City city1 = City.builder().build();
-        City city2 = City.builder()
+        FrenchCity city1 = FrenchCity.builder().build();
+        FrenchCity city2 = FrenchCity.builder()
                 .name("Toulouse")
                 .build();
-        City city3 = City.builder()
+        FrenchCity city3 = FrenchCity.builder()
                 .name("Toulouse")
                 .population(470000)
                 .region("Occitanie")
                 .build();
-        City city4 = City.builder()
+        FrenchCity city4 = FrenchCity.builder()
                 .name("Toulouse")
                 .population(470000)
                 .build();
-        City city5 = City.builder()
+        FrenchCity city5 = FrenchCity.builder()
                 .name("Toulouse")
                 .region("Occitanie")
                 .build();
-        City city6 = City.builder()
+        FrenchCity city6 = FrenchCity.builder()
                 .name("Toulouse")
                 .population(470000)
                 .region("Occitanie")
