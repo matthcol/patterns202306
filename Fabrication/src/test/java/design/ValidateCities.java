@@ -2,6 +2,7 @@ package design;
 
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -15,9 +16,9 @@ public class ValidateCities {
     static Validator validator;
     @BeforeAll
     static void initValidator(){
-        validator = Validation
-                .buildDefaultValidatorFactory()
-                .getValidator();
+        ValidatorFactory validatorFactory = Validation
+                .buildDefaultValidatorFactory();
+        validator = validatorFactory.getValidator();
     }
 
     private static Stream<FrenchCity> validCities() {
