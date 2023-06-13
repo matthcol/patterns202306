@@ -59,7 +59,7 @@ class ExpressionTest {
         // operation broadcast
         String texte = expression3.toString();
         // checkup (notation polonaise inversée)
-        assertEquals("12 x + 3 y - *", texte);
+        assertEquals("12.0 x + 3.0 y - *", texte);
     }
 
 }
