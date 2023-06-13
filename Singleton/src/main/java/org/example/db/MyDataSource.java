@@ -1,6 +1,8 @@
 package org.example.db;
 
+import com.mysql.cj.jdbc.MysqlDataSource;
 import org.h2.jdbcx.JdbcDataSource;
+import org.postgresql.ds.PGSimpleDataSource;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -31,9 +33,21 @@ public class MyDataSource implements IMyDataSource {
         }
         // init data source
         String[] jdbcParams = urlJdbc.split(":");
-        if (jdbcParams[1] == "h2") {
-            this.dataSource = new JdbcDataSource();
-        } // TODO: other providers + exceptions
+        String provider = jdbcParams[1];
+        switch (provider) {
+            case "h2":
+                this.dataSource = new JdbcDataSource();
+                break;;
+            case "postgresql":
+                this.dataSource = new PGSimpleDataSource();
+                break;
+            case "mysql":
+                this.dataSource = new MysqlDataSource();
+                break;
+            default:
+                throw new IllegalArgumentException("JDBC provider unknown: " + provider);
+            // TODO: other providers + exceptions
+        }
     }
 
     public static MyDataSource getInstance() {
