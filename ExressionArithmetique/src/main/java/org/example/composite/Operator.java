@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Composite class in the Composite design pattern.
+ * Represents an operator expression with 1 to n operands of any kind of expression
+ */
 @RequiredArgsConstructor(staticName = "of")
 public class Operator implements Expression {
     @Getter @Setter
@@ -24,15 +28,20 @@ public class Operator implements Expression {
     private List<Expression> operands = new ArrayList<>();
 
     @Override
-    public void addOperand(Expression operand) {
+    public Expression addOperand(Expression operand) {
         operands.add(operand);
+        return this;
     }
 
+    /**
+     * string representation using 'polonaise inversée'
+     * @return string representation
+     */
     @Override
     public String toString() {
         String childrenToString = this.operands.stream()
                 .map(Expression::toString)
                 .collect(Collectors.joining(" "));
-        return childrenToString + " " + name;
+        return childrenToString + " " + this.name;
     }
 }

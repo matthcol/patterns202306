@@ -29,9 +29,9 @@ class ExpressionTest {
     static Stream<Expression> children() {
         var child1 = Valeur.of(5);
         var child2 = Variable.of("x");
-        var child3 = Operator.of("+");
-        child3.addOperand(child1);
-        child3.addOperand(child2);
+        var child3 = Operator.of("+")
+                .addOperand(child1)
+                .addOperand(child2);
         return Stream.of(child1,child2,child3);
     }
 
@@ -47,15 +47,15 @@ class ExpressionTest {
     @Test
     void testToString(){
         // composite expression
-        Expression expression1 = Operator.of("+");
-        expression1.addOperand(Valeur.of(12));
-        expression1.addOperand(Variable.of("x"));
-        Expression expression2 = Operator.of("-");
-        expression2.addOperand(Valeur.of(3));
-        expression2.addOperand(Variable.of("y"));
-        Expression expression3 = Operator.of("*");
-        expression3.addOperand(expression1);
-        expression3.addOperand(expression2);
+        Expression expression1 = Operator.of("+")
+                .addOperand(Valeur.of(12.0))
+                .addOperand(Variable.of("x"));
+        Expression expression2 = Operator.of("-")
+                .addOperand(Valeur.of(3.0))
+                .addOperand(Variable.of("y"));
+        Expression expression3 = Operator.of("*")
+                .addOperand(expression1)
+                .addOperand(expression2);
         // operation broadcast
         String texte = expression3.toString();
         // checkup (notation polonaise inversée)
