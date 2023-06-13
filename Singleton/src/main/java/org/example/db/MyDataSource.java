@@ -2,10 +2,12 @@ package org.example.db;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.h2.jdbcx.JdbcDataSource;
+import org.mariadb.jdbc.MariaDbDataSource;
 import org.postgresql.ds.PGSimpleDataSource;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class MyDataSource implements IMyDataSource {
@@ -35,15 +37,40 @@ public class MyDataSource implements IMyDataSource {
         String[] jdbcParams = urlJdbc.split(":");
         String provider = jdbcParams[1];
         switch (provider) {
-            case "h2":
-                this.dataSource = new JdbcDataSource();
-                break;;
-            case "postgresql":
-                this.dataSource = new PGSimpleDataSource();
+            case "h2": {
+                var localDataSource = new JdbcDataSource();
+                localDataSource.setURL(urlJdbc);
+                this.dataSource = localDataSource;
                 break;
-            case "mysql":
-                this.dataSource = new MysqlDataSource();
+            }
+            case "postgresql": {
+                var localDataSource = new PGSimpleDataSource();
+                localDataSource.setURL(urlJdbc);
+                localDataSource.setUser(user);
+                localDataSource.setPassword(password);
+                this.dataSource = localDataSource;
                 break;
+            }
+            case "mysql": {
+                var localDataSource = new MysqlDataSource();
+                localDataSource.setURL(urlJdbc);
+                localDataSource.setUser(user);
+                localDataSource.setPassword(password);
+                this.dataSource = localDataSource;
+                break;
+            }
+            case "mariadb": {
+                var localDataSource = new MariaDbDataSource();
+                try {
+                    localDataSource.setUrl(urlJdbc);
+                    localDataSource.setUser(user);
+                    localDataSource.setPassword(password);
+                    this.dataSource = localDataSource;
+                } catch (SQLException e) {
+                    throw new MySqlException("Unable to set datasource", e);
+                }
+                break;
+            }
             default:
                 throw new IllegalArgumentException("JDBC provider unknown: " + provider);
             // TODO: other providers + exceptions
@@ -61,8 +88,22 @@ public class MyDataSource implements IMyDataSource {
         return myDataSource;
     }
 
+    public static void  destroyIfExists() {
+        if (myDataSource != null) {
+            synchronized (MyDataSource.class) {
+                if (myDataSource != null) {
+                    myDataSource = null;
+                }
+            }
+        }
+    }
+
     @Override
-    public Connection getConnection() {
-        return dataSource.getConnection();
+    public Connection getConnection()  {
+        try {
+            return dataSource.getConnection();
+        } catch (SQLException e) {
+            throw new MySqlException("Error while getting connection", e);
+        }
     }
 }
