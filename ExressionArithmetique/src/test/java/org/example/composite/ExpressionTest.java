@@ -16,6 +16,7 @@ class ExpressionTest {
                 Variable.of("x")
         );
     }
+
     @ParameterizedTest
     @MethodSource("leaves")
     void testLeafHasNoChild(Expression leaf) {
@@ -25,12 +26,21 @@ class ExpressionTest {
         );
     }
 
+    static Stream<Expression> children() {
+        var child1 = Valeur.of(5);
+        var child2 = Variable.of("x");
+        var child3 = Operator.of("+");
+        child3.addOperand(child1);
+        child3.addOperand(child2);
+        return Stream.of(child1,child2,child3);
+    }
+
     @ParameterizedTest
-    @MethodSource("leaves")
-    void testOperatorHasChildren(Expression leaf) {
+    @MethodSource("children")
+    void testOperatorHasChildren(Expression child) {
         var operator = Operator.of("+");
         assertDoesNotThrow(() ->
-            operator.addOperand(leaf)
+            operator.addOperand(child)
         );
     }
 
