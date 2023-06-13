@@ -48,10 +48,10 @@ class ExpressionTest {
     void testToString(){
         // composite expression
         Expression expression1 = Operator.of("+");
-        expression1.addOperand(Value.of(12));
+        expression1.addOperand(Valeur.of(12));
         expression1.addOperand(Variable.of("x"));
         Expression expression2 = Operator.of("-");
-        expression2.addOperand(Value.of(3));
+        expression2.addOperand(Valeur.of(3));
         expression2.addOperand(Variable.of("y"));
         Expression expression3 = Operator.of("*");
         expression3.addOperand(expression1);
