@@ -6,9 +6,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -48,19 +46,30 @@ public class Operator implements Expression {
 
     @Override
     public Iterator<Expression> iterator() {
-        return null;
+        return OperatorIterator.of(this);
     }
 
+    @RequiredArgsConstructor(staticName = "of")
     class OperatorIterator implements Iterator<Expression> {
+
+        private Deque<Expression> expressionToIterate = new LinkedList<>();
+
+        @NonNull
+        private Operator rootExpression;
 
         @Override
         public boolean hasNext() {
-            return false;
+            return !expressionToIterate.isEmpty();
         }
 
         @Override
         public Expression next() {
-            return null;
+            if (expressionToIterate.isEmpty()) {
+                throw new NoSuchElementException("nothing to iterate anymore");
+            }
+            var nextExpression = expressionToIterate.pop();
+            // TODO: push children in the stack
+            return nextExpression;
         }
     }
 }

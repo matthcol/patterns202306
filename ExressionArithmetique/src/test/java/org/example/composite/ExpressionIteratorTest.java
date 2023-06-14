@@ -15,5 +15,6 @@ public class ExpressionIteratorTest {
                 default -> throw new IllegalArgumentException("Expression unknown");
             }
         }
+        // sequence order: * + 12 x - 3 y
     }
 }
