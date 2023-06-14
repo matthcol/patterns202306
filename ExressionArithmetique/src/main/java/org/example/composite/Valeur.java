@@ -18,8 +18,4 @@ public class Valeur implements Expression {
         return "" + value;
     }
 
-    @Override
-    public Iterator<Expression> iterator() {
-        return null;
-    }
 }

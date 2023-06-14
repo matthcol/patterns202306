@@ -1,5 +1,7 @@
 package org.example.composite;
 
+import java.util.Iterator;
+
 /**
  * Component interface in the Composite design pattern.
  * Generalize every type of components: composite (operator)
@@ -19,4 +21,9 @@ public interface Expression extends Iterable<Expression> {
     // you can add other methods to manage children:
     // addOperands, removeOperand(s), replaceOperand
     // insertOperand, clearOperands, ...
+
+    @Override
+    default Iterator<Expression> iterator() {
+        return ExpressionIterator.of(this);
+    }
 }

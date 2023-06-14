@@ -18,8 +18,4 @@ public class Variable implements Expression {
         return name;
     }
 
-    @Override
-    public Iterator<Expression> iterator() {
-        return null;
-    }
 }
