@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,5 +44,23 @@ public class Operator implements Expression {
                 .map(Expression::toString)
                 .collect(Collectors.joining(" "));
         return childrenToString + " " + this.name;
+    }
+
+    @Override
+    public Iterator<Expression> iterator() {
+        return null;
+    }
+
+    class OperatorIterator implements Iterator<Expression> {
+
+        @Override
+        public boolean hasNext() {
+            return false;
+        }
+
+        @Override
+        public Expression next() {
+            return null;
+        }
     }
 }

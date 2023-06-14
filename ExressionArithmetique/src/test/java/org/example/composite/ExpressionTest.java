@@ -47,15 +47,7 @@ class ExpressionTest {
     @Test
     void testToString(){
         // composite expression
-        Expression expression1 = Operator.of("+")
-                .addOperand(Valeur.of(12.0))
-                .addOperand(Variable.of("x"));
-        Expression expression2 = Operator.of("-")
-                .addOperand(Valeur.of(3.0))
-                .addOperand(Variable.of("y"));
-        Expression expression3 = Operator.of("*")
-                .addOperand(expression1)
-                .addOperand(expression2);
+        Expression expression3 = ExpressionProvider.expression3levels();
         // operation broadcast
         String texte = expression3.toString();
         // checkup (notation polonaise inversée)

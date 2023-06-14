@@ -5,6 +5,8 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.util.Iterator;
+
 @RequiredArgsConstructor(staticName = "of")
 public class Valeur implements Expression {
     @Getter @Setter
@@ -14,5 +16,10 @@ public class Valeur implements Expression {
     @Override
     public String toString() {
         return "" + value;
+    }
+
+    @Override
+    public Iterator<Expression> iterator() {
+        return null;
     }
 }

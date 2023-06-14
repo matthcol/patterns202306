@@ -5,7 +5,7 @@ package org.example.composite;
  * Generalize every type of components: composite (operator)
  * and leaves (value, variable)
  */
-public interface Expression {
+public interface Expression extends Iterable<Expression> {
     /**
      * add a child expression (operand) to the current expression
      * @param operand child to add

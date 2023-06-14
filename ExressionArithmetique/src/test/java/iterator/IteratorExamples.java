@@ -78,6 +78,9 @@ public class IteratorExamples {
         for (var city: iterable) {
             System.out.println(bullet + city);
         }
+        // NB:
+        var it  = iterable.iterator();
+        System.out.println("Iterator class:" + it.getClass());
     }
 
     @Test
