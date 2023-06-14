@@ -1,4 +1,4 @@
-package org.example.composite.visitor;
+package org.example.visitor;
 
 import org.example.composite.Operator;
 import org.example.composite.Valeur;

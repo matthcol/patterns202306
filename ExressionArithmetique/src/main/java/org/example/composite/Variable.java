@@ -4,9 +4,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.example.composite.visitor.ExpressionVisitor;
-
-import java.util.Iterator;
+import org.example.visitor.ExpressionVisitor;
 
 @RequiredArgsConstructor(staticName = "of")
 public class Variable implements Expression {

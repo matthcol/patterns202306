@@ -1,10 +1,11 @@
-package org.example.composite.visitor;
+package org.example.visitor.impl;
 
 import org.example.composite.Operator;
 import org.example.composite.Valeur;
 import org.example.composite.Variable;
+import org.example.visitor.ExpressionVisitor;
 
-public class DisplayVisitor implements ExpressionVisitor{
+public class DisplayVisitor implements ExpressionVisitor {
     private int indent;
     private int deltaIndent;
 

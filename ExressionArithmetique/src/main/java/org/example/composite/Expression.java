@@ -1,6 +1,6 @@
 package org.example.composite;
 
-import org.example.composite.visitor.ExpressionVisitor;
+import org.example.visitor.ExpressionVisitor;
 
 import java.util.Iterator;
 

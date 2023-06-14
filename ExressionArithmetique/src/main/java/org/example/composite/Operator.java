@@ -5,8 +5,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.apache.commons.collections4.iterators.ReverseListIterator;
-import org.example.composite.visitor.ExpressionVisitor;
+import org.example.visitor.ExpressionVisitor;
 
 import java.util.*;
 import java.util.stream.Collectors;
