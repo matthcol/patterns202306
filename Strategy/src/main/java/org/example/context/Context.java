@@ -23,10 +23,11 @@ public class Context<T extends Comparable<? super T>> {
 
     public void operation() {
         System.out.println("before sorting:" + list);
-        SortStrategy sortStrategy = (list.size() >=10) ?
-                strategyDict.get("quickSort")
-                : strategyDict.get("bubbleSort");
+        String nameStrategy= (list.size() >=10) ? "quickSort": "bubbleSort";
+        System.out.println("strategy chosen:" + nameStrategy);
+        SortStrategy sortStrategy = strategyDict.get(nameStrategy);
         sortStrategy.sort(list);
         System.out.println("after sorting:" + list);
+        System.out.println();
     }
 }

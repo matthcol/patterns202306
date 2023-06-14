@@ -1,5 +1,6 @@
 package org.example.strategy;
 
+import java.util.Collections;
 import java.util.List;
 
 public class BubbleSortStrategy<T extends Comparable<? super T>> implements SortStrategy<T> {
@@ -9,9 +10,7 @@ public class BubbleSortStrategy<T extends Comparable<? super T>> implements Sort
             boolean sorted = true;
             for (int j = 0; j <= i - 1; j++){
                 if (list.get(j+1).compareTo(list.get(j)) < 0){
-                    T tmp = list.get(j+1);
-                    list.set(j+1, list.get(j));
-                    list.set(j, tmp);
+                    Collections.swap(list, j, j+1);
                     sorted = false;
                 }
             }

@@ -19,4 +19,11 @@ class ContextTest {
                 "Bayonne", "Biarritz", "Bordeaux", "La Rochelle", "Rennes", "Lille");
         context.operation();
     }
+
+    @Test
+    void useOperationBigDataNumeric(){
+        var context = new Context<Integer>(12, 33, 44, 14, 65, 6,
+                14, 67, 91, 234, 438, 901);
+        context.operation();
+    }
 }
