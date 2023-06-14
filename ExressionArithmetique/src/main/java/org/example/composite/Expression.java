@@ -1,5 +1,7 @@
 package org.example.composite;
 
+import org.example.composite.visitor.ExpressionVisitor;
+
 import java.util.Iterator;
 
 /**
@@ -26,4 +28,7 @@ public interface Expression extends Iterable<Expression> {
     default Iterator<Expression> iterator() {
         return ExpressionIterator.of(this);
     }
+
+    // design pattern Visitor
+    void accept(ExpressionVisitor visitor);
 }

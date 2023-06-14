@@ -6,6 +6,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.apache.commons.collections4.iterators.ReverseListIterator;
+import org.example.composite.visitor.ExpressionVisitor;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -32,6 +33,11 @@ public class Operator implements Expression {
     public Expression addOperand(Expression operand) {
         operands.add(operand);
         return this;
+    }
+
+    @Override
+    public void accept(ExpressionVisitor visitor) {
+        visitor.visitOperator(this);
     }
 
     /**

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.example.composite.visitor.ExpressionVisitor;
 
 import java.util.Iterator;
 
@@ -18,4 +19,8 @@ public class Valeur implements Expression {
         return "" + value;
     }
 
+    @Override
+    public void accept(ExpressionVisitor visitor) {
+        visitor.visitValeur(this);
+    }
 }
