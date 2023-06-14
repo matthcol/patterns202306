@@ -1,5 +1,6 @@
 package org.example.composite;
 
+import org.example.composite.visitor.DisplayVisitor;
 import org.example.composite.visitor.ExpressionVisitor;
 import org.junit.jupiter.api.Test;
 
@@ -9,8 +10,16 @@ public class ExpressionVisitorTest {
 
     @Test
     void visitDisplay() {
+        // expected result
+        // *
+        //    +
+        //       12.0
+        //       x
+        //    -
+        //       3.0
+        //       y
         Expression expression = ExpressionProvider.expression3levels();
-        ExpressionVisitor visitor = null; // TODO:  new DisplayVisitor();
+        ExpressionVisitor visitor = new DisplayVisitor();
         expression.accept(visitor);
     }
 
