@@ -35,7 +35,7 @@ public class ExpressionVisitorTest {
         expression.accept(visitor);
         String text = visitor.getResult();
         System.out.println("Expression toString: " + text);
-        assertEquals("12.0 x + 3 y - *", text);
+        assertEquals("12.0 x + 3.0 y - *", text);
     }
 
     @Test
