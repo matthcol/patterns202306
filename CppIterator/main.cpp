@@ -20,6 +20,12 @@ void iterateContainers() {
     
     std::list<std::string> cityList(cities.cbegin(), cities.cend());
     printlnIterable(cityList.cbegin(), cityList.cend(), " @ ");
+
+    // parcours par reference constante
+    for (const auto& city: cities) {
+        std::cout << city << " ";
+    }
+    std::cout << std::endl;
 }
 
 
