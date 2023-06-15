@@ -78,10 +78,10 @@ public class MainWindow extends JFrame {
 
     private void initEvents() {
         // with ConcreteClass implementing interface command ActionListener
-        // jbtOk.addActionListener(CommandOk.of(this));
+        jbtOk.addActionListener(CommandOk.of(this));
 
         // Java 8+: with a function compatible with interface command ActionListener
-        jbtOk.addActionListener(actionEvent -> updateModelFromViewPanel());
+        // jbtOk.addActionListener(actionEvent -> updateModelFromViewPanel());
     }
 
     public void setModel(City city) {
