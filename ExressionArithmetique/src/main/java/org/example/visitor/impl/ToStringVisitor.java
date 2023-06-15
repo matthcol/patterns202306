@@ -12,23 +12,32 @@ import org.example.visitor.ExpressionVisitorResult;
  */
 public class ToStringVisitor implements ExpressionVisitorResult<String> {
 
+    private StringBuilder stringBuilder;
+    public ToStringVisitor() {
+        stringBuilder = new StringBuilder();
+    }
+
     @Override
     public void visitOperator(Operator operator) {
-
+        operator.getOperands().forEach(operand -> {
+            operand.accept(this);
+            stringBuilder.append(' ');
+        });
+        stringBuilder.append(operator.getName());
     }
 
     @Override
     public void visitVariable(Variable variable) {
-
+        stringBuilder.append(variable.getName());
     }
 
     @Override
     public void visitValeur(Valeur valeur) {
-
+        stringBuilder.append(valeur.getValue());
     }
 
     @Override
     public String getResult(){
-        return null;
+        return stringBuilder.toString();
     }
 }

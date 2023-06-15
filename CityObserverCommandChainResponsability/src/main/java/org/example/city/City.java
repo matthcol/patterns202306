@@ -5,13 +5,22 @@ import org.example.observer.Subject;
 
 @Builder
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
 @ToString
-public class City extends Subject {
+public class City extends Subject<City> {
     private String name;
     private int population;
     private String region;
+
+    public City() {
+        super(City.class);
+    }
+
+    public City(String name, int population, String region) {
+        this();
+        this.name = name;
+        this.population = population;
+        this.region = region;
+    }
 
     public void setName(String name) {
         this.name = name;
