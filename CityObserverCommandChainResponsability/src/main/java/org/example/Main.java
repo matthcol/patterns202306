@@ -1,7 +1,10 @@
 package org.example;
 
+import org.example.gui.MainWindow;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        MainWindow mainWindow = new MainWindow();
+        mainWindow.setVisible(true);
     }
 }
