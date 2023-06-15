@@ -84,6 +84,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
+                <!-- comment following for java 19 -->
                 <configuration>
                     <compilerArgs>--enable-preview</compilerArgs>
                 </configuration>
