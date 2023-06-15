@@ -5,6 +5,8 @@ import org.example.command.CommandOk;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 public class MainWindow extends JFrame {
 
@@ -69,19 +71,30 @@ public class MainWindow extends JFrame {
         menuBar.add(menuFile);
         var menuEdit = new JMenu("Edit");
         itemChange = new JMenuItem("Change");
+        itemChange.setAccelerator(KeyStroke.getKeyStroke(
+                "control M"));
         menuEdit.add(itemChange);
         itemReset = new JMenuItem("Reset");
         menuEdit.add(itemReset);
+        itemReset.setAccelerator(KeyStroke.getKeyStroke(
+                "control Z"));
         menuBar.add(menuEdit);
+        menuBar.setVisible(true);
         this.setJMenuBar(menuBar);
     }
 
     private void initEvents() {
         // with ConcreteClass implementing interface command ActionListener
-        jbtOk.addActionListener(CommandOk.of(this));
+        // command Ok
+        ActionListener commandOk = CommandOk.of(this)
+        jbtOk.addActionListener(commandOk);
+        itemChange.addActionListener(commandOk);
 
         // Java 8+: with a function compatible with interface command ActionListener
-        // jbtOk.addActionListener(actionEvent -> updateModelFromViewPanel());
+        // command Reset
+        ActionListener commandReset = actionEvent -> updateViewPanelFromModel();
+        jbtReset.addActionListener(commandReset);
+        itemReset.addActionListener(commandReset);
     }
 
     public void setModel(City city) {
@@ -94,5 +107,9 @@ public class MainWindow extends JFrame {
     public void updateModelFromViewPanel() {
         City cityTemp = cityViewPanel.getCity();
         city.update(cityTemp);
+    }
+
+    public void updateViewPanelFromModel() {
+        cityViewPanel.setCity(city);
     }
 }
