@@ -36,4 +36,11 @@ public class City extends Subject<City> {
         this.region = region;
         notifyAllObservers();
     }
+
+    public void update(City cityTemp) {
+        this.name = cityTemp.name;
+        this.population = cityTemp.population;
+        this.region = cityTemp.region;
+        notifyAllObservers();
+    }
 }

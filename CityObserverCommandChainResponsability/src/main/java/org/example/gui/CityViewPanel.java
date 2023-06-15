@@ -6,8 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CityViewPanel extends JPanel {
-    // initial city, can be changed later
-    private City city;
 
     // widgets
     private JTextField jtfName;
@@ -27,9 +25,17 @@ public class CityViewPanel extends JPanel {
     }
 
     public void setCity(City city) {
-        this.city = city;
         jtfName.setText(city.getName());
         jspnPopulation.setValue(city.getPopulation());
         jtfRegion.setText(city.getRegion());
     }
+
+    public City getCity() {
+        return City.builder()
+                .name(jtfName.getText())
+                .population((Integer) jspnPopulation.getValue())
+                .region(jtfRegion.getText())
+                .build();
+    }
+
 }

@@ -1,6 +1,7 @@
 package org.example.gui;
 
 import org.example.city.City;
+import org.example.command.CommandOk;
 
 import javax.swing.*;
 import java.awt.*;
@@ -76,11 +77,22 @@ public class MainWindow extends JFrame {
     }
 
     private void initEvents() {
+        // with ConcreteClass implementing interface command ActionListener
+        // jbtOk.addActionListener(CommandOk.of(this));
+
+        // Java 8+: with a function compatible with interface command ActionListener
+        jbtOk.addActionListener(actionEvent -> updateModelFromViewPanel());
     }
 
     public void setModel(City city) {
         // register views as observers
         this.city = city;
         cityViewPanel.setCity(city);
+    }
+
+    // receive
+    public void updateModelFromViewPanel() {
+        City cityTemp = cityViewPanel.getCity();
+        city.update(cityTemp);
     }
 }

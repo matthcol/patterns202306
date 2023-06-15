@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.city.City;
+import org.example.city.observer.CityDisplayConsole;
 import org.example.gui.MainWindow;
 
 public class Main {
@@ -14,6 +15,9 @@ public class Main {
                 .region("Occitanie")
                 .build();
         mainWindow.setModel(city);
+        // observer in console
+        CityDisplayConsole cityDisplayConsole = new CityDisplayConsole();
+        city.register(cityDisplayConsole);
         // start GUI
         mainWindow.setVisible(true);
     }
