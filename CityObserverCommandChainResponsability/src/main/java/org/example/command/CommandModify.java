@@ -8,14 +8,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 @RequiredArgsConstructor(staticName = "of")
-public class CommandOk implements ActionListener {
+public class CommandModify implements ActionListener {
     @NonNull
     private MainWindow mainWindow;
 
     @Override
     public void actionPerformed(ActionEvent e) {
         // log
-        System.out.println("CommandOK called");
+        System.out.println("Command Modify called");
         // call receiver
         mainWindow.updateModelFromViewPanel();
     }

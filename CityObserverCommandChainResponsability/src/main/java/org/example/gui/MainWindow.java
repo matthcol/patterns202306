@@ -1,12 +1,11 @@
 package org.example.gui;
 
 import org.example.city.City;
-import org.example.command.CommandOk;
+import org.example.command.CommandModify;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 
 public class MainWindow extends JFrame {
 
@@ -15,13 +14,13 @@ public class MainWindow extends JFrame {
 
     // GUI components
     private CityViewPanel cityViewPanel;
-    private JButton jbtOk;
+    private JButton jbtModify;
     private JButton jbtReset;
     private JButton jbtSave;
     private JButton jbtLoad;
     private JButton jbtExit;
 
-    private JMenuItem itemChange;
+    private JMenuItem itemModify;
     private JMenuItem itemReset;
     private JMenuItem itemSave;
     private JMenuItem itemLoad;
@@ -40,16 +39,17 @@ public class MainWindow extends JFrame {
 
     private void initComponents() {
         this.setPreferredSize(new Dimension(400,400));
-        var mainPanel = this.getRootPane();
+        var mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
+        this.getContentPane().add(mainPanel);
         // city view panel
         cityViewPanel = new CityViewPanel();
         mainPanel.add(BorderLayout.CENTER, cityViewPanel);
         // control buttons
         var panelButtons  = new JPanel();
         panelButtons.setLayout(new FlowLayout());
-        jbtOk = new JButton("OK");
-        panelButtons.add(jbtOk);
+        jbtModify = new JButton("Modify");
+        panelButtons.add(jbtModify);
         jbtReset = new JButton("Reset");
         panelButtons.add(jbtReset);
         jbtSave = new JButton("Save");
@@ -61,19 +61,25 @@ public class MainWindow extends JFrame {
         mainPanel.add(BorderLayout.SOUTH, panelButtons);
         // menu bar
         var menuBar = new JMenuBar();
-        var menuFile = new JMenu("Edit");
+        var menuFile = new JMenu("File");
         itemLoad = new JMenuItem("Load");
         menuFile.add(itemLoad);
+        itemLoad.setAccelerator(KeyStroke.getKeyStroke(
+                "control O"));
         itemSave = new JMenuItem("Save");
+        itemSave.setAccelerator(KeyStroke.getKeyStroke(
+                "control S"));
         menuFile.add(itemSave);
         itemExit = new JMenuItem("Exit");
         menuFile.add(itemExit);
+        itemExit.setAccelerator(KeyStroke.getKeyStroke(
+                "control Q"));
         menuBar.add(menuFile);
         var menuEdit = new JMenu("Edit");
-        itemChange = new JMenuItem("Change");
-        itemChange.setAccelerator(KeyStroke.getKeyStroke(
+        itemModify = new JMenuItem("Modify");
+        itemModify.setAccelerator(KeyStroke.getKeyStroke(
                 "control M"));
-        menuEdit.add(itemChange);
+        menuEdit.add(itemModify);
         itemReset = new JMenuItem("Reset");
         menuEdit.add(itemReset);
         itemReset.setAccelerator(KeyStroke.getKeyStroke(
@@ -86,15 +92,21 @@ public class MainWindow extends JFrame {
     private void initEvents() {
         // with ConcreteClass implementing interface command ActionListener
         // command Ok
-        ActionListener commandOk = CommandOk.of(this)
-        jbtOk.addActionListener(commandOk);
-        itemChange.addActionListener(commandOk);
+        ActionListener commandOk = CommandModify.of(this);
+        jbtModify.addActionListener(commandOk);
+        itemModify.addActionListener(commandOk);
 
         // Java 8+: with a function compatible with interface command ActionListener
         // command Reset
         ActionListener commandReset = actionEvent -> updateViewPanelFromModel();
         jbtReset.addActionListener(commandReset);
         itemReset.addActionListener(commandReset);
+
+        ActionListener commandExit = actionEvent -> this.dispose();
+        itemExit.addActionListener(commandExit);
+
+        itemSave.addActionListener(actionEvent -> System.out.println("TODO: save city"));
+        itemLoad.addActionListener(actionEvent -> System.out.println("TODO: load city"));
     }
 
     public void setModel(City city) {
@@ -105,11 +117,13 @@ public class MainWindow extends JFrame {
 
     // receive
     public void updateModelFromViewPanel() {
+        System.out.println("Update model from view");
         City cityTemp = cityViewPanel.getCity();
         city.update(cityTemp);
     }
 
     public void updateViewPanelFromModel() {
+        System.out.println("Update view from model");
         cityViewPanel.setCity(city);
     }
 }
