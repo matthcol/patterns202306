@@ -4,31 +4,19 @@ import jakarta.validation.constraints.Min;
 import lombok.NonNull;
 import org.example.client.CarteBancaire;
 
-public interface EtatDistributeur {
-    static EtatDistributeur HORS_SERVICE = new EtatHorsService();
-    static EtatDistributeur EN_SERVICE = new EtatEnService();
-    static EtatDistributeur CARTE_INTRODUITE = new EtatCarteIntroduite();
-    static EtatDistributeur CLIENT_AUTHENTIFIE = new EtatClientAuthentifie();
+public interface IEtatDistributeur {
+    static IEtatDistributeur HORS_SERVICE = new EtatHorsService();
+    static IEtatDistributeur EN_SERVICE = new EtatEnService();
+    static IEtatDistributeur CARTE_INTRODUITE = new EtatCarteIntroduite();
+    static IEtatDistributeur CLIENT_AUTHENTIFIE = new EtatClientAuthentifie();
 
-    default void handleAlimenter(Distributeur distributeur, @Min(10) int somme){
-        throw new UnsupportedOperationException("Method not allowed in this state");
-    }
+    void handleAlimenter(Distributeur distributeur, @Min(10) int somme);
 
-    default void handleRetirerSomme(Distributeur distributeur, @Min(10) int somme){
-        throw new UnsupportedOperationException("Method not allowed in this state");
-    }
+    void handleRetirerSomme(Distributeur distributeur, @Min(10) int somme);
 
-    default void handleIntroduireCarte(Distributeur distributeur, @NonNull CarteBancaire carteBancaire){
-        throw new UnsupportedOperationException("Method not allowed in this state");
-    }
+    void handleIntroduireCarte(Distributeur distributeur, @NonNull CarteBancaire carteBancaire);
 
-    default void handleTaperCode(Distributeur distributeur, CarteBancaire carteBancaire, int code){
-        throw new UnsupportedOperationException("Method not allowed in this state");
-    }
+    void handleTaperCode(Distributeur distributeur, CarteBancaire carteBancaire, int code);
 
-    @Override
-    default String toString() {
-        return this.getClass().getSimpleName();
-    }
 
 }
